@@ -14,6 +14,7 @@
             font-family: Arial, sans-serif;
             margin: 30px;
             background-color: #f9f9f9;
+            padding-bottom: 80px; /* 預留底部空間給 Cookie 提示列 */
         }
         h1 {
             color: #333;
@@ -79,6 +80,57 @@
         .btn-colorful-flash:active {
             transform: scale(0.95) !important;
         }
+
+        /* 🍪 Cookie 同意彈窗樣式 */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #222222;
+            color: #ffffff;
+            padding: 15px 20px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            z-index: 9999;
+            font-size: 14px;
+        }
+        .cookie-banner p {
+            margin: 0;
+            flex: 1;
+            min-width: 200px;
+        }
+        .cookie-btns {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-cookie-accept {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-cookie-accept:hover {
+            background-color: #218838;
+        }
+        .btn-cookie-decline {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-cookie-decline:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body>
@@ -93,7 +145,6 @@
         <a href="https://edu.google.com/intl/ALL_tw/workspace-for-education/products/classroom/" class="btn" target="_blank">前往classroom</a>
         <a href="https://www.youtube.com/" class="btn" target="_blank">前往YouTube</a>
         <a href="https://www.crazygames.com/" class="btn" target="_blank">前往crazy game</a>
-        <a href="https://zack0512.github.io/joke" class="btn" target="_blank">前往每週笑話</a>
 
         <a href="https://zack0512.github.io/snake/" class="btn-colorful-flash" target="_blank">
             <span>前往沙特貪吃蛇（終極版）</span>
@@ -103,11 +154,39 @@
     <hr style="margin-top: 30px;">
 
     <div>
-        <small>有意製作網站，請洽沙特本人，</small><br>
-        <big>進入本網站表示您同意本網站使用cookie</big><br>
-        <small>©2026沙特 v.1.05</small>
+        <small>有意製作網站，請洽沙特本人</small><br>
+        <small>©2026沙特 v.1.04</small>
     </div>
+
+    <!-- 🍪 Cookie 提示橫幅 -->
+    <div id="cookieBanner" class="cookie-banner" style="display: none;">
+        <p>🍪 本網站使用 Cookie 以提供最佳的使用體驗與廣告服務。點擊「同意」表示您接受我們的政策。</p>
+        <div class="cookie-btns">
+            <button class="btn-cookie-accept" onclick="acceptCookie()">同意</button>
+            <button class="btn-cookie-decline" onclick="declineCookie()">拒絕</button>
+        </div>
+    </div>
+
+    <script>
+        // 檢查使用者先前是否已經選擇過
+        window.onload = function() {
+            if (!localStorage.getItem('cookieConsent')) {
+                document.getElementById('cookieBanner').style.display = 'flex';
+            }
+        };
+
+        // 按下同意
+        function acceptCookie() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieBanner').style.display = 'none';
+        }
+
+        // 按下拒絕
+        function declineCookie() {
+            localStorage.setItem('cookieConsent', 'declined');
+            document.getElementById('cookieBanner').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
-
