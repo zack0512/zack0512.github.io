@@ -12,14 +12,37 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1973255703694706" crossorigin="anonymous"></script>
 
     <style>
+        /* 1. 預設主題（淺色模式） */
         :root {
+            color-scheme: light dark; /* 讓瀏覽器滾動條等元件也能跟隨系統變化 */
+            
             --primary-color: #007bff;
             --primary-hover: #0056b3;
             --bg-color: #f4f6f9;
             --card-bg: #ffffff;
+            --card-border: #e0e0e0;
             --text-color: #333333;
             --text-muted: #666666;
             --border-radius: 10px;
+            --shadow: 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-hover: 0 4px 12px rgba(0,0,0,0.12);
+            --footer-border: #e0e0e0;
+        }
+
+        /* 2. 自動偵測系統深色模式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #3b82f6;
+                --primary-hover: #60a5fa;
+                --bg-color: #121212;
+                --card-bg: #1e1e1e;
+                --card-border: #2d2d2d;
+                --text-color: #e0e0e0;
+                --text-muted: #a0a0a0;
+                --shadow: 0 2px 4px rgba(0,0,0,0.3);
+                --shadow-hover: 0 4px 12px rgba(0,0,0,0.5);
+                --footer-border: #2c2c2c;
+            }
         }
 
         * {
@@ -35,6 +58,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease; /* 深淺切換滑順過渡 */
         }
 
         header {
@@ -71,12 +95,12 @@
             justify-content: center;
             padding: 12px 16px;
             background-color: var(--card-bg);
-            color: var(--primary-color);
-            border: 1px solid #e0e0e0;
+            color: var(--text-color);
+            border: 1px solid var(--card-border);
             text-decoration: none;
             border-radius: var(--border-radius);
             font-weight: 600;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            box-shadow: var(--shadow);
             transition: all 0.2s ease;
             text-align: center;
         }
@@ -86,7 +110,7 @@
             color: #ffffff;
             border-color: var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-hover);
         }
 
         /* 彩虹流光特效按鈕 */
@@ -136,7 +160,7 @@
             margin-top: 40px;
             text-align: center;
             color: var(--text-muted);
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid var(--footer-border);
             padding-top: 20px;
             width: 100%;
             max-width: 800px;
@@ -155,7 +179,7 @@
             background-color: #1e1e1e;
             color: #ffffff;
             padding: 14px 24px;
-            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -163,6 +187,7 @@
             gap: 12px;
             z-index: 9999;
             font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .cookie-banner p {
@@ -216,7 +241,13 @@
             <a href="https://edu.google.com/intl/ALL_tw/workspace-for-education/products/classroom/" class="btn" target="_blank" rel="noopener noreferrer">前往 Classroom</a>
             <a href="https://www.youtube.com/" class="btn" target="_blank" rel="noopener noreferrer">前往 YouTube</a>
             <a href="https://www.crazygames.com/" class="btn" target="_blank" rel="noopener noreferrer">前往 CrazyGames</a>
-            <a href="https://zack0512.github.io/joke" class="btn" target="_blank" rel="noopener noreferrer">前往沙特每週笑話</a>
+                    <a href="https://zack0512.github.io/joke" class="btn-colorful-flash" target="_blank" rel="noopener noreferrer">
+            <span>前往沙特每週笑話</span>
+        </a>
+                    <a href="https://zack0512.github.io/cold" class="btn-colorful-flash" target="_blank" rel="noopener noreferrer">
+            <span>前往沙特每週冷知識</span>
+                    </a>
+            
             <a href="https://zack0512.github.io/homework" class="btn" target="_blank" rel="noopener noreferrer">前往沙特每日作業</a>
             <a href="https://zack0512.github.io/tetris" class="btn" target="_blank" rel="noopener noreferrer">前往沙特俄羅斯方塊</a>
             <a href="https://zack0512.github.io/2048" class="btn" target="_blank" rel="noopener noreferrer">前往沙特 2048</a>
