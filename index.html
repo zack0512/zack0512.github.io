@@ -488,6 +488,17 @@
 
         .cookie-banner p { margin: 0; }
 
+        /* Cookie 提示文字中的超連結樣式 */
+        .cookie-banner a {
+            color: #60a5fa;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        .cookie-banner a:hover {
+            color: #93c5fd;
+        }
+
         .cookie-btns { display: flex; gap: 8px; }
 
         .cookie-btns button {
@@ -582,7 +593,7 @@
     </footer>
 
     <aside id="cookieBanner" class="cookie-banner" style="display: none;">
-        <p>🍪 本網站使用 Cookie 以提供最佳服務與廣告體驗。</p>
+        <p>🍪 本網站使用 <a href="https://zack0512.github.io/cookie" target="_blank" rel="noopener noreferrer">Cookie</a> 以提供最佳服務與廣告體驗。</p>
         <div class="cookie-btns">
             <button class="btn-accept" onclick="acceptCookie()">同意 (Agree)</button>
             <button class="btn-decline" onclick="declineCookie()">拒絕 (Reject)</button>
