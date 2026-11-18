@@ -70,7 +70,7 @@
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
-            padding: 40px 20px 80px 20px;
+            padding: 64px 20px 80px 20px;
             background: var(--bg-gradient);
             background-attachment: fixed;
             color: var(--text-color);
@@ -79,8 +79,60 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, padding-top 0.3s ease;
             position: relative;
+        }
+
+        /* 頂部寒冷注意橫條 */
+        .cold-alert-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #0284c7, #38bdf8, #0284c7);
+            background-size: 200% 100%;
+            animation: coldBannerShift 6s ease infinite;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 40px 10px 16px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            z-index: 10000;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        @keyframes coldBannerShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cold-alert-close {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #ffffff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .cold-alert-close:hover {
+            background: rgba(255, 255, 255, 0.35);
         }
 
         /* 科技背景網格圖層 */
@@ -166,7 +218,7 @@
         /* 右上角切換主題按鈕 */
         .theme-toggle-btn {
             position: absolute;
-            top: 20px;
+            top: 56px;
             right: 20px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -521,6 +573,12 @@
 </head>
 <body>
 
+    <!-- 頂部注意橫條 -->
+    <div class="cold-alert-banner" id="coldAlertBanner" role="alert">
+        <span>❄️ ⚠️ 注意：小心寒冷，請注意保暖！</span>
+        <button class="cold-alert-close" id="closeColdAlert" aria-label="關閉提醒">✕</button>
+    </div>
+
     <!-- 自訂游標 -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
@@ -551,7 +609,7 @@
         <div class="header-actions">
 
             <a href="https://zack0512.github.io/shoot/" class="btn-colorful-flash tilt-effect search-item" target="_blank" rel="noopener noreferrer">
-                <span>💥沙沙射擊遊戲👍扯到爆🔥</span>
+                <span>💥莎莎射擊遊戲👍扯到爆🔥</span>
             </a>
             
             <a href="https://zack0512.github.io/call/" class="btn-colorful-flash tilt-effect search-item" target="_blank" rel="noopener noreferrer">
@@ -648,6 +706,17 @@
     </aside>
 
     <script>
+        // 0. 頂部寒冷注意橫條關閉邏輯
+        const coldAlertBanner = document.getElementById('coldAlertBanner');
+        const closeColdAlert = document.getElementById('closeColdAlert');
+        const themeBtn = document.getElementById('themeToggleBtn');
+
+        closeColdAlert.addEventListener('click', () => {
+            coldAlertBanner.style.display = 'none';
+            document.body.style.paddingTop = '40px';
+            themeBtn.style.top = '20px';
+        });
+
         // 1. Cookie 邏輯
         window.addEventListener('DOMContentLoaded', () => {
             if (!localStorage.getItem('cookieConsent')) {
